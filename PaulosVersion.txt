@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+  <!-- http://community.sitepoint.com/t/accordion-jitter/113343/ -->
+    <base href="http://2.turtlewolf.info/" />
+      <meta charset="utf-8">
+      <title>Accordion</title>
+      <link rel="stylesheet" href="css/main.css">
+      <link rel="stylesheet" href="css/fonts/Harting-fontfacekit/web fonts/harting_plain_macroman/stylesheet.css">
+      <style>
+      .ui-accordion .ui-accordion-header {
+        display: block;
+        cursor: pointer;
+        position: relative;
+        margin: 2px 0 0 0;
+        padding: .5em .5em .5em .7em;
+        min-height: 0; /* support: IE7 */
+        font-size: 100%;
+      }
+      .ui-accordion .ui-accordion-icons {
+        padding-left: 2.2em;
+      }
+      .ui-accordion .ui-accordion-icons .ui-accordion-icons {
+        padding-left: 2.2em;
+      }
+      .ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+        position: absolute;
+        left: .5em;
+        top: 50%;
+        margin-top: -8px;
+      }
+      .ui-accordion .ui-accordion-content {
+        padding: 1em 2.2em;
+        border-top: 0;
+        overflow: auto;
+      }
+
+      h3:focus{
+        outline: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="accordion">
+      <h3><a href="mailto:@gmail.com"><p id="email">Early Beta</p></a></h3>
+      <div>
+        <div id='screen'></div>
+        <p id="myText"></p>
+      </div>
+
+      <h3>First header</h3>
+      <div>
+        First content panel <p>Hello world! This is HTML5 Boilerplate.</p>
+      </div>
+
+      <h3>Second header</h3>
+      <div>Second content panel</div>
+
+      <h3>3rd header</h3>
+      <div>
+        3rd content panel <p>Hello world! This is HTML5 Boilerplate.</p>
+      </div>
+
+      <h3>4th header</h3>
+      <div>4th content panel</div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script>
+      function typeWriter(l,s,a,i){
+        var track = "";
+        var len = s.length;
+        var n = 0;
+        var aud = new Audio(a);
+        $(l).text("");
+        window.si = setInterval(function(){
+          if(!aud.paused){
+            aud.pause();
+            aud.currentTime = 0;
+          }
+          var res = track + s.charAt(n);
+          $(l).text(res);
+          if(s.charAt(n)!==" "){
+            aud.play();
+          }
+          track = res;
+          if(n===len-1){
+            clearInterval(si);
+          }
+          n = n + 1;
+        },i);
+      }
+    </script>
+    <script>
+      $( "#accordion" ).accordion();
+      var text = "EarlyBeta@gmail.com";
+      typeWriter("#myText", text,"example.ogg",500);
+      $("h3").on("click", function(){
+        clearInterval(si);
+        $("#myText").text(text);
+      });
+    </script>
+  </body>
+</html>
