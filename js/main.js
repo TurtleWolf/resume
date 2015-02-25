@@ -89,7 +89,7 @@ $( "#accordion" ).accordion({
   event: "click hoverintent"
 });
 var text = "Thank you for your interest in my work. I am available for hire, but I do prefer to work from home.";
-typeWriter("#myText", text,"example.ogg",500);
+typeWriter("#myText", text,"example.ogg",250);
 $("h3").on("click hoverintent", function(){
   clearInterval(si);
   $("#myText").text(text);
